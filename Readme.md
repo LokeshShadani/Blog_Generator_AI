@@ -28,7 +28,7 @@
 
 Blog_Generator_AI/ │ ├── app.py # Main Flask app ├── templates/ # HTML templates │ ├── index.html │ └── script.js ├── static/ # CSS and assets ├── Logo_Making_Website/ # Optional logo generation module │ ├── app.py │ └── templates/ └── README.md
 
-Code
+
 
 ---
 
