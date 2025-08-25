@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Ryzex AI Blog Studio</title>
+<link rel="stylesheet" href="assets/css/ui-dark.css" />
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">R</div>
+      <div class="brand-text">
+        <div class="title">Ryzex</div>
+        <div class="subtitle">AI Blog Studio</div>
+      </div>
+    </div>
+    <nav>
+      <button id="themeToggle" class="btn ghost">☀️ Light</button>
+      <a class="btn primary" href="#" id="publishBtn">Publish</a>
+    </nav>
+  </header>
+
+  <main class="layout">
+    <!-- Left panel -->
+    <aside class="panel controls">
+      <div class="panel-head">
+        <h3>Generate Blog</h3>
+        <p class="muted">Fast drafts or publish-ready posts</p>
+      </div>
+
+      <div class="form">
+        <label>Topic</label>
+        <input id="topic" placeholder="e.g. Best AI tools for bloggers 2025">
+
+        <div class="row two">
+          <div>
+            <label>Audience</label>
+            <input id="audience" placeholder="beginners, indie makers">
+          </div>
+          <div>
+            <label>Tone</label>
+            <select id="tone">
+              <option>Helpful</option>
+              <option>Professional</option>
+              <option>Casual</option>
+              <option>Persuasive</option>
+            </select>
+          </div>
+        </div>
+
+        <label>Keywords (comma)</label>
+        <input id="keywords" placeholder="ai writing, content automation">
+
+        <div class="row two">
+          <div>
+            <label>Length</label>
+            <select id="length">
+              <option value="short">Short (700)</option>
+              <option value="medium" selected>Medium (1300)</option>
+              <option value="long">Long (2000)</option>
+            </select>
+          </div>
+          <div>
+            <label>Mode</label>
+            <select id="mode">
+              <option value="draft">Draft (fast)</option>
+              <option value="pro">Pro (publish)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Language selector -->
+        <label>Language</label>
+        <select id="language">
+          <option value="en" selected>English</option>
+          <option value="hi">Hindi</option>
+        </select>
+
+        <div class="controls-row">
+          <button id="btnGenerate" class="btn primary">Generate</button>
+          <button id="btnOneClick" class="btn ghost">One-Click</button>
+        </div>
+
+        <div class="tips muted small">Tip: Use Pro mode for Gemini 1.5-Flash output.</div>
+      </div>
+
+      <div class="panel-foot">
+        <div class="stat">
+          <div class="stat-value" id="wordCount">0</div>
+          <div class="stat-label">Words</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value" id="seoScore">--</div>
+          <div class="stat-label">SEO</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Right panel -->
+    <section class="panel editor">
+      <div class="editor-head">
+        <input id="titleInput" class="titleInput" placeholder="Write a catchy title (auto-generated)" readonly />
+      </div>
+      <div class="editor-head">
+        <div class="editor-actions">
+          <button id="btnCopy" class="ghost">Copy</button>
+          <button id="downloadTxt" class="ghost">Download</button>
+        </div>
+      </div>
+
+      <div id="toolbar" class="toolbar"></div>
+
+      <div class="editor-body">
+        <textarea id="editor" placeholder="# Your generated article will appear here..." spellcheck="false"></textarea>
+        <div id="preview" class="preview md"></div>
+      </div>
+
+      <div class="preview-toggle">
+        <button id="btnEdit" class="btn ghost active">Edit</button>
+        <button id="btnPreview" class="btn ghost">Preview</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer muted">Built with ❤️ — Ryzex AI</footer>
+
+  <div id="toast" class="toast"></div>
+</div>
+
+<script type="module" src="assets/js/ui-main.js"></script>
+</body>
+</html>

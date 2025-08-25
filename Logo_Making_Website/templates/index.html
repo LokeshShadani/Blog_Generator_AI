@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Logo Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background-color: #f5f5f5;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      width: 350px;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    img {
+      margin-top: 15px;
+      max-width: 100%;
+      border-radius: 10px;
+      display: none;
+    }
+    #loading {
+      display: none;
+      font-weight: bold;
+      color: #007bff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>AI Logo Generator</h2>
+    <input id="name" placeholder="Enter your brand name" />
+    <input id="style" placeholder="Enter logo style (e.g., minimal, modern, 3D)" />
+    <button onclick="generateLogo()">Generate Logo</button>
+    <p id="loading">Generating your logo...</p>
+    <img id="logo" alt="Generated Logo" />
+  </div>
+
+  <script>
+    const API_URL = "https://api-inference.huggingface.co/models/deepfloyd/IF-I-XL-v1.0";
+    const API_KEY = "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";
+
+    async function generateLogo() {
+      const name = document.getElementById("name").value.trim();
+      const style = document.getElementById("style").value.trim();
+      const logo = document.getElementById("logo");
+      const loading = document.getElementById("loading");
+
+      if (!name) {
+        alert("Please enter a brand name!");
+        return;
+      }
+
+      logo.style.display = "none";
+      loading.style.display = "block";
+
+      const prompt = `High-quality minimalistic modern logo for brand "${name}" in ${style} style, clean vector design, perfect typography`;
+
+      try {
+        const response = await fetch(API_URL, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${API_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ inputs: prompt }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP Error! Status: ${response.status}`);
+        }
+
+        const blob = await response.blob();
+        const imgUrl = URL.createObjectURL(blob);
+
+        logo.src = imgUrl;
+        logo.style.display = "block";
+      } catch (error) {
+        alert("Error: " + error.message);
+      } finally {
+        loading.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>
